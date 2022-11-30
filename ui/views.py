@@ -46,6 +46,8 @@ def Home(request):
 
 
 def VPSHome(request):
+    title = "แบบฟอร์มการขอรับบริการ Virtual Private Server"
+    iso = "IDT-FM-IF-010"
     if request.method == "POST":
 
         form = VPS_FORMS(request.POST)
@@ -59,11 +61,14 @@ def VPSHome(request):
             payload["fullname"] = fullname
             payload["desc"] = str(
                 form.cleaned_data["desc"]).replace("\r\n", " ")
+            payload["form_title"] = title
+            payload["form_iso_no"] = iso
 
             buffer = vps_request_form(payload)
 
+
             timenow = datetime.now().strftime("%Y-%m-%d_%H:%M:%S")
-            return FileResponse(buffer, filename=f"account-info-{timenow}.pdf", as_attachment=False)
+            return FileResponse(buffer, filename=f"ISO-{iso}-{timenow}.pdf", as_attachment=False)
 
         # show alert message
         print(form.is_valid())
@@ -72,7 +77,7 @@ def VPSHome(request):
 
     form = VPS_FORMS(initial={"domain": "ยังไม่ได้กำหนดชื่อ domain"})
     context = {
-        "title": "แบบฟอร์มการขอรับบริการ Virtual Private Server",
+        "title": title,
         "form": form
     }
 

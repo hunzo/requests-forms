@@ -21,7 +21,7 @@ class PDF(FPDF):
 
     def header(self):
         # Logo
-        self.set_font('th', '', 10)
+        self.set_font('th', '', 12)
         logo_path = f"{settings.MEDIA_ROOT}/logo"
 
         self.image(f'{logo_path}/xlogo.jpg', 11, 20.8, 18)

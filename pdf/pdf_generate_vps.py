@@ -6,9 +6,11 @@ import uuid
 
 def vps_request_form(object):
     pdf = PDF(
-        form_title="การขอรับบริการ Virtual Private Server / domain",
+        # form_title="การขอรับบริการ Virtual Private Server / domain",
+        form_title=object["form_title"],
         form_subtitle="สำนักเทคโนโลยีดิจิทัลและสารสนเทศ",
-        form_iso_no="IDT-FM-IF-010 (05/05/2022)",
+        # form_iso_no="IDT-FM-IF-010 (05/05/2022)",
+        form_iso_no=object["form_iso_no"],
         form_no=str(uuid.uuid4()),
 
         orientation="P",

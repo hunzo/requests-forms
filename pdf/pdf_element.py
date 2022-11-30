@@ -3,17 +3,28 @@ from .pdf_template import PDF
 font_size = 16
 
 
+def Cell(pdf: PDF, h, txt, border, ln, align, i: int):
+    w = pdf.get_string_width(txt) + i
+    pdf.cell(w, h, txt, border, ln, align)
+
+
+def Block(pdf: PDF, w, h, border, ln, aligned):
+    pdf.cell(w, h, "", border, ln, aligned)
+
+
 def Paragraph(pdf: PDF, key: str, value: str, indent: int, h: int):
     pdf.cell(w=indent, h=h, border='L', txt="")
     pdf.cell(w=0, h=h, txt=f"{key}: {value}", border='R', ln=1)
 
-def Paragraph2Colum(pdf: PDF, key:list, value:list, w: int, h: int):
+
+def Paragraph2Colum(pdf: PDF, key: list, value: list, w: int, h: int):
 
     # pdf.cell(w=w, h=h, border='L', txt="")
     pdf.cell(w=w, h=h, txt=f"{key[0]}: {value[0]}", ln=0, border='L')
-    
+
     pdf.cell(w=w, h=h, txt="")
     pdf.cell(w=0, h=h, txt=f"{key[1]}: {value[1]}", border='R', ln=1)
+
 
 def TextHeader1(pdf: PDF, message: str):
     fontSize = font_size
@@ -43,16 +54,20 @@ def TextSigned(obj: PDF, name: str):
     obj.cell(0, hY, "( คณบดี / ผู้อำนวยการ หรือเทียบเท่า )    ", border, 1, 'R')
     obj.cell(0, hY, "วันที่ ________/________/________    ", border, 1, 'R')
 
+
 def TextSignedColo(obj: PDF, name: str):
     hY = 8
     fontSize = font_size
     border = 'L, R'
     obj.set_font("th", '', fontSize)
-    obj.cell(0, hY, f"ลงนามผู้ดูแลเครื่อง ________________________    ", border, 1, 'R')
+    obj.cell(
+        0, hY, f"ลงนามผู้ดูแลเครื่อง ________________________    ", border, 1, 'R')
     obj.cell(0, hY, f"( {name} )    ", border, 1, 'R')
-    obj.cell(0, hY, "ลงนามผู้บริหารหน่วยงาน ____________________________    ", border, 1, 'R')
+    obj.cell(
+        0, hY, "ลงนามผู้บริหารหน่วยงาน ____________________________    ", border, 1, 'R')
     obj.cell(0, hY, "( ___________________________)    ", border, 1, 'R')
     obj.cell(0, hY, "วันที่ ________/________/________    ", border, 1, 'R')
+
 
 def TextStaff(obj: PDF):
     fontSize = font_size
@@ -91,6 +106,7 @@ def TextStaff(obj: PDF):
 
     obj.cell(boxw, h, txt="", border='L,R, B')
     obj.cell(0, h, txt="", border='R, B')
+
 
 def TextStaffCoLo(obj: PDF):
     fontSize = font_size

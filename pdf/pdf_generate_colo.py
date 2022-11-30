@@ -63,7 +63,6 @@ def colo_request_form(object):
 
     TextStaffCoLo(pdf)
 
-
     
     ret = pdf.output(dest='S')
 

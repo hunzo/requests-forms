@@ -1,7 +1,12 @@
 from .pdf_template import PDF
-from .pdf_element import TextHeader1, TextHeader2, TextSigned, TextStaff, Paragraph, Paragraph2Colum
+from .pdf_element import TextHeader1, TextHeader2, TextSigned, TextStaff, Paragraph, Paragraph2Colum, Cell, Block
+from math import ceil
 import io
 import uuid
+
+# def Cell(pdf: PDF, text, border, ln, aligned ):
+#     w = pdf.get_string_width(text) + 10
+#     pdf.cell(w, 8, text, border, ln, aligned)
 
 
 def vpn_request_form(object):
@@ -21,49 +26,60 @@ def vpn_request_form(object):
 
     fontSize = 16
     # effective_page_width = pdf.w - 2*pdf.l_margin
-
-    TextHeader1(pdf, "1. ผู้ใช้งาน")
     p = 8
-    ident = 10
+    ident = 15
     hstyle = 'b'
-    # 1 line
-    pdf.set_font('th', hstyle, fontSize)
-    pdf.cell(35, p, "ข้าพเจ้า (ภาษาไทย)", 'L')
-    pdf.set_font('th', '', fontSize)
-    pdf.cell(40, p, object["fname_th"])
+
+    pdf.set_font('th', "b", fontSize)
+    Cell(pdf, p, "1. ผู้ใช้งาน", "L", 0, "L", 3)
+    Block(pdf, 0, p, "R", 1, 'C')
+
+   # 1 line
 
     pdf.set_font('th', hstyle, fontSize)
-    pdf.cell(20, p, "นามสกุล")
+    Cell(pdf, p, "ข้าพเจ้า (ภาษาไทย)", 'L', 0, 'L', 3)
     pdf.set_font('th', '', fontSize)
-    pdf.cell(0, p, object["lname_th"], 'R', 1)
+    Cell(pdf, p, object["fname_th"], 0, 0, 'C', 3)
+
+    pdf.set_font('th', hstyle, fontSize)
+    Cell(pdf, p, "นามสกุล", 0, 0, 'L', 3)
+    pdf.set_font('th', '', fontSize)
+    Cell(pdf, p, object["lname_th"], 0, 0, 'C', 3)
+    Block(pdf, 0, p, "R", 1, 'C')
 
     # 2 line
-    pdf.set_font('th', hstyle, fontSize)
-    pdf.cell(32, p, "ชื่อ (ภาษาอังกฤษ)", 'L')
-    pdf.set_font('th', '', fontSize)
-    pdf.cell(40, p, object["fname"])
 
     pdf.set_font('th', hstyle, fontSize)
-    pdf.cell(20, p, "นามสกุล")
+    Cell(pdf, p, "ข้าพเจ้า (ภาษาอังกฤษ)", 'L', 0, 'L', 3)
     pdf.set_font('th', '', fontSize)
-    pdf.cell(0, p, object["lname"], 'R', 1)
+    Cell(pdf, p, object["fname"], 0, 0, 'C', 3)
+
+    pdf.set_font('th', hstyle, fontSize)
+    Cell(pdf, p, "นามสกุล", 0, 0, 'L', 5)
+    pdf.set_font('th', '', fontSize)
+    Cell(pdf, p, object["lname"], 0, 0, 'C', 1)
+    Block(pdf, 0, p, "R", 1, 'C')
 
     # 3 line
     pdf.set_font('th', hstyle, fontSize)
-    pdf.cell(35, p, "หน่วยงาน / บริษัท", 'L')
+    # pdf.cell(35, p, "หน่วยงาน / บริษัท", 'L')
+    Cell(pdf, p, "หน่วยงาน / บริษัท", 'L', 0, 'L', 3)
     pdf.set_font('th', '', fontSize)
-    pdf.cell(0, p, object["dept"], 'R', 1)
+    Cell(pdf, p, object["dept"], 0, 0, 'C', 1)
+    Block(pdf, 0, p, "R", 1, 'C')
+    # pdf.cell(0, p, object["dept"], 'R', 1)
 
     # 4 line
     pdf.set_font('th', hstyle, fontSize)
-    pdf.cell(32, p, "เบอร์โทร", 'L')
+    Cell(pdf, p, "เบอร์โทร", "L", 0, "L", 3)
     pdf.set_font('th', '', fontSize)
-    pdf.cell(40, p, object["tel"])
+    Cell(pdf, p, object["tel"], 0, 0, 'C', 3)
 
     pdf.set_font('th', hstyle, fontSize)
-    pdf.cell(20, p, "อีเมล")
+    Cell(pdf, p, "อีเมล", 0, 0, "L", 3)
     pdf.set_font('th', '', fontSize)
-    pdf.cell(0, p, object["email"], 'R', 1)
+    Cell(pdf, p, object["email"], 0, 0, 'C', 3)
+    Block(pdf, 0, p, "R", 1, 'C')
 
     # 5 line
     pdf.set_font('th', hstyle, fontSize)
@@ -89,14 +105,19 @@ def vpn_request_form(object):
 
     # 9 line
     pdf.set_font('th', hstyle, fontSize)
-    pdf.cell(32, p, "เริ่มใช้วันที่", 'L')
+    Cell(pdf, p, "เริ่มใช้วันที่", "L", 0, "L", 3)
+    # pdf.cell(32, p, "เริ่มใช้วันที่", 'L')
     pdf.set_font('th', '', fontSize)
-    pdf.cell(40, p, str(object["start_date"]))
+    Cell(pdf, p, str(object["start_date"]), 0, 0, 'C', 3)
+    # pdf.cell(40, p, str(object["start_date"]))
 
     pdf.set_font('th', hstyle, fontSize)
-    pdf.cell(20, p, "ถึงวันที่")
+    Cell(pdf, p, "ถึงวันที่", 0, 0, "L", 3)
+    # pdf.cell(20, p, "ถึงวันที่")
     pdf.set_font('th', '', fontSize)
-    pdf.cell(0, p, str(object["end_date"]), 'R', 1)
+    Cell(pdf, p, str(object["end_date"]), 0, 0, 'C', 3)
+    # pdf.cell(0, p, str(object["end_date"]), 'R', 1)
+    Block(pdf, 0, p, "R", 1, 'C')
 
     # 10 line
     pdf.cell(
@@ -121,25 +142,27 @@ def vpn_request_form(object):
     hstyle = 'b'
     # 14 line
     pdf.set_font('th', hstyle, fontSize)
-    pdf.cell(10, p, "ชื่อ", 'L')
+    Cell(pdf, p, "ชื่อ", "L", 0, "L", 3)
     pdf.set_font('th', '', fontSize)
-    pdf.cell(30, p, object["co_fname_th"])
+    Cell(pdf, p, str(object["co_fname_th"]), 0, 0, 'C', 3)
 
     pdf.set_font('th', hstyle, fontSize)
-    pdf.cell(20, p, "นามสกุล")
+    Cell(pdf, p, "นามสกุล", 0, 0, "L", 3)
     pdf.set_font('th', '', fontSize)
-    pdf.cell(0, p, object["co_lname_th"], 'R', 1)
+    Cell(pdf, p, str(object["co_lname_th"]), 0, 0, 'C', 3)
+    Block(pdf, 0, p, "R", 1, 'C')
 
     # 15 line
     pdf.set_font('th', hstyle, fontSize)
-    pdf.cell(20, p, "หน่วยงาน", 'L')
+    Cell(pdf, p, "หน่วยงาน", "L", 0, "L", 3)
     pdf.set_font('th', '', fontSize)
-    pdf.cell(30, p, object["co_dept"])
+    Cell(pdf, p, str(object["co_dept"]), 0, 0, 'C', 3)
 
     pdf.set_font('th', hstyle, fontSize)
-    pdf.cell(20, p, "อีเมล ")
+    Cell(pdf, p, "อีเมล", 0, 0, "L", 3)
     pdf.set_font('th', '', fontSize)
-    pdf.cell(0, p, object["email"], 'R', 1)
+    Cell(pdf, p, str(object["email"]), 0, 0, 'C', 3)
+    Block(pdf, 0, p, "R", 1, 'C')
 
     # line break
     pdf.cell(0, p/2, "", 'L,R', 1)
@@ -182,6 +205,33 @@ def vpn_request_form(object):
     pdf.cell(80, p, "วันที่______/______/______", 'L, B', 0, 'C')
     pdf.cell(0, p, "วันที่______/______/______", 'L,R, B', 1, 'C')
 
+    # text = object["fullname"]
+    # w = pdf.get_string_width(text) + 10
+
+    # dash(pdf, 10)
+    # pdf.cell(w, 10, text, 'R,L', 0, 'C')
+    # dash(pdf, 190)
+
+    # print("-"*100)
+    # print(w)
+    # print(ceil(w))
+
+    # print(ceil(pdf.get_x()))
+
+    # # pdf.cell(0, 10, "_")
+
+    # print(ceil(pdf.get_x()))
+
+    # pdf.ln(1)
+
+    # max_size = 187
+
+    # [pdf.cell(1, 10, "_") for _ in range(max_size)]
+
     ret = pdf.output(dest='S')
 
     return io.BytesIO(ret)
+
+
+def dash(o: PDF, n):
+    [o.cell(1, 10, "_") for _ in range(n)]

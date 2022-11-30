@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="card">
+    <div class="card-header">
+        <b>
+            {{ title }}
+        </b>
+    </div>
+    <div class="card-body">
+        <form method="post">
+            {% csrf_token %}
+            <table cellpadding="10">
+                {{ form.as_table }}
+            </table>
+
+            {% include 'info.html' %}
+            <div class="mt-4">
+                <button type="submit" class="btn btn-info w-100">Generate Forms</button>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

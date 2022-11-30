@@ -1,0 +1,53 @@
+/* .card {
+    border: 1px solid #6c757c;
+} */
+
+
+@font-face {
+    font-family: Prompt;
+    src: url(/static/font/Prompt-Regular.ttf);
+}
+
+a:link {
+    color: #212529;
+    background-color: transparent;
+    text-decoration: none;
+}
+
+a:visited {
+    color: #6C757D;
+    background-color: transparent;
+    text-decoration: none;
+}
+
+a:hover {
+    color: #17A2BB;
+    background-color: transparent;
+    text-decoration: underline;
+}
+
+a:active {
+    color: #6C757D;
+    background-color: transparent;
+    text-decoration: underline;
+}
+
+body {
+    font-family: 'Prompt', sans-serif;
+}
+
+/* .list-group-item {
+    border: 1px solid #c3c3c3;
+} */
+
+.btn-info {
+    color: #fff;
+    background-color: #17a2b8;
+    border-color: #17a2b8;
+}
+
+.btn-info:hover {
+    color: #fff;
+    background-color: #2b7a86;
+    border-color: #17a2b8;
+}

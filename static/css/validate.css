@@ -1,0 +1,59 @@
+/* The message box is shown when the user clicks on the password field */
+#message {
+  display: none;
+  /* background: #c1c1c1; */
+  /* color: #000; */
+  /* border: 1px solid #c9c9c9; */
+  border-radius: 5px;
+  position: relative;
+  /* padding: 10px; */
+  /* margin-top: 0px; */
+}
+
+.validation {
+  font-size: 16px;
+  padding: 15px 0px 15px 10px;
+  /* border: 1px solid black; */
+}
+
+/* Add a green text color and a checkmark when the requirements are right */
+.valid {
+  color: #6c757d;
+}
+
+.valid:before {
+  position: relative;
+  color: green;
+  left: -5px;
+  content: '\f058';
+  font-family: fontAwesome;
+}
+
+/* Add a red text color and an "x" icon when the requirements are wrong */
+.invalid {
+  color: #6c757d;
+  /* border: 1px solid green; */
+}
+
+.invalid:before {
+  /* border: 1px solid red; */
+  color: #DC3545;
+  position: relative;
+  left: -5px;
+  content: '\f06a';
+  font-family: fontAwesome;
+}
+
+/* .inputBox #toggleBtn {
+  position: absolute;
+  top: 8px;
+  right: 10px;
+  width: 34px;
+  height: 34px;
+  background-color: rgba(0, 0, 0, 0.05);
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+} */

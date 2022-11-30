@@ -17,17 +17,9 @@ import os
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
-# SECURITY WARNING: keep the secret key used in production secret!
-# SECRET_KEY = 'django-insecure-qx(ck4^r#6eez_8!sedo6nnw)2llebmuc==(aildvc6iko+@6a'
-
-# SECURITY WARNING: don't run with debug turned on in production!
-# DEBUG = True
-
-# ALLOWED_HOSTS = []
 
 SECRET_KEY = os.environ.get("SECRET_KEY")
 
@@ -41,8 +33,6 @@ CSRF_TRUSTED_ORIGINS = [
     "http://localhost:1083",
     "http://10.100.100.140:1083",
 ]
-
-
 
 
 # Application definition

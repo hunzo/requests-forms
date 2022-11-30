@@ -34,11 +34,12 @@ def TextHeader1(pdf: PDF, message: str):
     pdf.set_font("th", '', fontSize)
 
 
-def TextHeader2(pdf: PDF, message: str, mSize: int, info: str):
+def TextHeader2(pdf: PDF, message: str, info: str):
     fontSize = font_size
+    x = pdf.get_string_width(message) + 3
     hY = 10
     pdf.set_font("th", 'B', fontSize)
-    pdf.cell(mSize, hY, message, 'L', 0, 'L')
+    pdf.cell(x, hY, message, 'L', 0, 'L')
     pdf.set_font("th", '', fontSize)
     pdf.cell(0, hY, info, 'R', 1, 'L')
 
@@ -50,8 +51,10 @@ def TextSigned(obj: PDF, name: str):
     obj.set_font("th", '', fontSize)
     obj.cell(0, hY, f"ลงชื่อ ________________________    ", border, 1, 'R')
     obj.cell(0, hY, f"( {name} )    ", border, 1, 'R')
-    obj.cell(0, hY, "ตำแหน่ง ____________________________    ", border, 1, 'R')
-    obj.cell(0, hY, "( คณบดี / ผู้อำนวยการ หรือเทียบเท่า )    ", border, 1, 'R')
+    # obj.cell(0, hY, "ตำแหน่ง ____________________________    ", border, 1, 'R')
+    obj.cell(0, hY, "ลงนามผู้บริหารหน่วยงาน ____________________________    ", border, 1, 'R')
+    # obj.cell(0, hY, "( คณบดี / ผู้อำนวยการ หรือเทียบเท่า )    ", border, 1, 'R')
+    obj.cell(0, hY, "( ___________________________ )    ", border, 1, 'R')
     obj.cell(0, hY, "วันที่ ________/________/________    ", border, 1, 'R')
 
 
@@ -72,14 +75,14 @@ def TextSignedColo(obj: PDF, name: str):
 def TextStaff(obj: PDF):
     fontSize = font_size
     h = 8
-    boxw = 80
+    boxw = 85
     obj.set_font("th", 'B', fontSize)
     obj.cell(boxw, h, txt="6. ความเห็นเจ้าหน้าที่", border='L, T, R')
     obj.cell(0, h, txt="7. ความเห็นของ ผู้อำนวยการสำนักเทคโนโลยีดิจิทัลและสารสนเทศ",
              border='R, T', ln=1, align='C')
 
     obj.set_font("th", '', fontSize)
-    obj.cell(boxw, h, txt="_______________________________________    ",
+    obj.cell(boxw, h, txt="_____________________________________    ",
              border='L,R', align='R')
     obj.cell(0, h, txt="[ ] อนุมัติ   [ ] ไม่อนุมัติ",
              border='R', ln=1, align='C')

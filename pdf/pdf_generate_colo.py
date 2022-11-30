@@ -21,7 +21,8 @@ def colo_request_form(object):
     fontSize = 14
     # effective_page_width = pdf.w - 2*pdf.l_margin
 
-    TextHeader2(pdf, "1. ส่วนงาน: ", 18, object["dept"])
+    # TextHeader2(pdf, "1. ส่วนงาน: ", 18, object["dept"])
+    TextHeader2(pdf, "1. ส่วนงาน: ",object["dept"])
     TextHeader1(pdf, "2. ข้อมูลผู้ดูแลระบบหรือผู้ประสานงานของหน่วยงาน")
     Paragraph(pdf, "ชื่อ-นามสกุล", object["fullname"], 5, 8)
     Paragraph(pdf, "ตำแหน่ง", object["level"], 5, 8)

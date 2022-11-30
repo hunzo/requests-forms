@@ -1,5 +1,5 @@
 from .pdf_template import PDF
-from .pdf_element import TextHeader1, TextHeader2, TextSigned, TextStaff, Paragraph
+from .pdf_element import TextHeader1, TextHeader2, TextSigned, TextStaff, Paragraph, Cell
 import io
 import uuid
 
@@ -21,7 +21,7 @@ def vps_request_form(object):
     # fontSize = 14
     # effective_page_width = pdf.w - 2*pdf.l_margin
 
-    TextHeader2(pdf, "1. ส่วนงาน: ", 18, object["dept"])
+    TextHeader2(pdf, "1. ส่วนงาน: ", object["dept"])
     TextHeader1(pdf, "2. ข้อมูลผู้ดูแลระบบหรือผู้ประสานงานของหน่วยงาน")
     Paragraph(pdf, "ชื่อ-นามสกุล", object["fullname"], 5, 8)
     Paragraph(pdf, "ตำแหน่ง", object["level"], 5, 8)
@@ -48,7 +48,8 @@ def vps_request_form(object):
         0, 9, "หากมีข้อสงสัยในการกรอกข้อมูล ติดต่อสอบถามได้ที่ โทร 02-727-3246", 'L,R', 1)
     pdf.cell(0, 1, "", 'L,R, B', 1)
 
-    TextHeader2(pdf, "4. ชื่อโดเมน: ", 20, object["domain"])
+    # TextHeader2(pdf, "4. ชื่อโดเมน: ", 20, object["domain"])
+    TextHeader2(pdf, "4. ชื่อโดเมน: ", object["domain"])
 
     pdf.set_font("th", 'B', 16)
     pdf.cell(0, 10, "5. ข้าพเจ้ารับทราบนโยบาย และยินดีจะรับผิดชอบต่อความเสียหายที่เกิดขึ้นตาม พระราชบัญญัติว่าด้วยการกระทำ", 'L, R, T', 1)

@@ -7,6 +7,7 @@ from .forms import VPS_FORMS, COLO_FORMS, DOMAIN_FORMS, VPN_FORMS, ACCOUNT_FORMS
 from pdf.pdf_generate_vps import vps_request_form
 from pdf.pdf_generate_colo import colo_request_form
 from pdf.pdf_generate_vpn import vpn_request_form
+from pdf.pdf_generate_account import account_request_form
 
 from datetime import datetime
 
@@ -149,10 +150,10 @@ def VPNHome(request):
             payload["form_title"] = title
             payload["form_iso_no"] = iso
 
-            buffer = vpn_request_form(payload)
+            buffer = account_request_form(payload)
 
             timenow = datetime.now().strftime("%Y-%m-%d_%H:%M:%S")
-            return FileResponse(buffer, filename=f"account-info-{timenow}.pdf", as_attachment=False)
+            return FileResponse(buffer, filename=f"{iso}-info-{timenow}.pdf", as_attachment=False)
 
         # show alert message
         print(form.is_valid())
@@ -170,12 +171,46 @@ def VPNHome(request):
 
 
 def ACCOUNTHome(request):
+
+    title = "แบบฟอร์มการขอบัญชีผู้ใช้งานเครือข่ายอินเทอร์เน็ตแบบชั่วคราว"
+    iso = "IDT-FM-IF-007"
+
+    if request.method == "POST":
+
+        form = ACCOUNT_FORMS(request.POST)
+        print(form.data)
+
+        if form.is_valid():
+
+            fullname = form.cleaned_data["fname_th"] + \
+                " " + form.cleaned_data["lname_th"]
+
+            payload = form.cleaned_data
+            payload["fullname"] = fullname
+            # payload["desc"] = str(
+            #     form.cleaned_data["desc"]).replace("\r\n", " ")
+
+            payload["form_title"] = title
+            payload["form_iso_no"] = iso
+
+            buffer = account_request_form(payload)
+
+            timenow = datetime.now().strftime("%Y-%m-%d_%H:%M:%S")
+            return FileResponse(buffer, filename=f"account-info-{timenow}.pdf", as_attachment=False)
+
+        # show alert message
+        print(form.is_valid())
+        print(form.errors)
+
+        return redirect("account-form")
+
     form = ACCOUNT_FORMS()
     context = {
-        "title": "แบบฟอร์มการขอบัญชีผู้ใช้งานเครือข่ายอินเทอร์เน็ตแบบชั่วคราว LAN, WIFI",
+        "title": title,
         "form": form
     }
-    return render(request, "request.html", context)
+
+    return render(request, 'request.html', context)
 
 
 def GUESTHome(request):

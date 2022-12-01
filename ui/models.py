@@ -68,7 +68,7 @@ class ACCOUNT(models.Model):
     dept = models.CharField(max_length=50)
     tel = models.CharField(max_length=20)
     email = models.EmailField(max_length=30)
-    person_type = models.CharField(max_length=20)
+    person_type = models.CharField(max_length=50)
     start_date = models.DateField()
     end_date = models.DateField()
 

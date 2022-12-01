@@ -66,7 +66,6 @@ def VPSHome(request):
 
             buffer = vps_request_form(payload)
 
-
             timenow = datetime.now().strftime("%Y-%m-%d_%H:%M:%S")
             return FileResponse(buffer, filename=f"ISO-{iso}-{timenow}.pdf", as_attachment=False)
 
@@ -85,11 +84,13 @@ def VPSHome(request):
 
 
 def COLOHome(request):
+    title = "แบบฟอร์มการขอรับบริการ Co-Location"
+    iso = "IDT-FM-IF-010"
+
     if request.method == "POST":
 
         form = COLO_FORMS(request.POST)
         print(form.data)
-
 
         if form.is_valid():
 
@@ -100,6 +101,9 @@ def COLOHome(request):
             payload["fullname"] = fullname
             payload["server_info"] = str(
                 form.cleaned_data["server_info"]).replace("\r\n", " ")
+
+            payload["form_title"] = title
+            payload["form_iso_no"] = iso
 
             buffer = colo_request_form(payload)
 
@@ -112,23 +116,25 @@ def COLOHome(request):
 
         return redirect("colo-form")
 
-    form = COLO_FORMS(initial={"inv_no": "xx-xx-xxxxxx-xxx", "os": "windows server"})
+    form = COLO_FORMS(
+        initial={"inv_no": "xx-xx-xxxxxx-xxx", "os": "windows server"})
     context = {
-        "title": "แบบฟอร์มการขอรับบริการ Co-Location",
+        "title": title,
         "form": form
     }
 
     return render(request, 'request.html', context)
 
 
-
 def VPNHome(request):
+
+    title = "แบบฟอร์มการขอรับบริการ Co-Location"
+    iso = "IDT-FM-IF-010"
 
     if request.method == "POST":
 
         form = VPN_FORMS(request.POST)
         print(form.data)
-
 
         if form.is_valid():
 
@@ -139,6 +145,9 @@ def VPNHome(request):
             payload["fullname"] = fullname
             payload["desc"] = str(
                 form.cleaned_data["desc"]).replace("\r\n", " ")
+
+            payload["form_title"] = title
+            payload["form_iso_no"] = iso
 
             buffer = vpn_request_form(payload)
 
@@ -153,17 +162,11 @@ def VPNHome(request):
 
     form = VPN_FORMS()
     context = {
-        "title": "แบบฟอร์มการขอรับบริการ VPN",
+        "title": title,
         "form": form
     }
 
     return render(request, 'request.html', context)
-    # form = VPN_FORMS()
-    # context = {
-    #     "title": "แบบฟอร์มการขอรับบริการ VPN",
-    #     "form": form
-    # }
-    # return render(request, "request.html", context)
 
 
 def ACCOUNTHome(request):

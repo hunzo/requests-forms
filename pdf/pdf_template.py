@@ -41,12 +41,9 @@ class PDF(FPDF):
 
     def footer(self):
         # Position at 1.5 cm from bottom
-        # self.cell(0, 0, "", 'T', 1)
         self.set_y(-15)
-        # Arial italic 8
         self.set_font('th', '', 12)
         # Page number
-        # self.cell(0, 10, self.form_iso_no + 'IDT-FM-IF-010 (05/05/2022) หน้า ' +
         self.cell(0, 10, self.form_iso_no + ' หน้า ' +
                   str(self.page_no()) + '/{nb}', 0, 0, 'R')
 
